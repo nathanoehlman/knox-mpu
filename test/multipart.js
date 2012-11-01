@@ -58,7 +58,6 @@ describe('Knox multipart form uploads', function() {
         // Upload the file
         mpu = new MultiPartUpload(opts, function(err, body) {
             if (err) return done(err);
-            console.log(body);
             assert.equal(body['Key'], opts.objectName);
             
             // Clean up after ourselves
@@ -102,7 +101,6 @@ describe('Knox multipart form uploads', function() {
 
             // Upload the file
             mpu = new MultiPartUpload(opts, function(err, body) {
-                console.log(err);
                 if (err) return done(err);
                 assert.equal(body['Key'], opts.objectName);
 
