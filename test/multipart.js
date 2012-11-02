@@ -103,6 +103,7 @@ describe('Knox multipart form uploads', function() {
             mpu = new MultiPartUpload(opts, function(err, body) {
                 if (err) return done(err);
                 assert.equal(body['Key'], opts.objectName);
+                assert.equal(body.size, 6242880);
 
                 // Clean up after ourselves
                 client.deleteFile(opts.objectName, function(err, res) {                    
