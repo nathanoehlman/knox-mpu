@@ -1,6 +1,6 @@
 {
   "name": "knox-mpu",
-  "version": "0.0.4",
+  "version": "0.1.0",
   "description": "Provide multi part upload functionality to Amazon S3 using the knox library",
   "keywords": ["aws", "amazon", "s3", "knox", "multi", "part", "upload"],
   "main": "index.js",
@@ -14,12 +14,13 @@
   "author": "Nathan Oehlman",
   "license": "BSD",
   "dependencies": {
-    "batch": "~0.2.0",
-    "knox": "~0.4.0",
-    "xml2js": "~0.2.0",
-    "lodash": "~0.9.0"
+    "batch": "0.2.x",
+    "xml2js": "0.2.x",
+    "lodash": "1.0.x"
   },
   "devDependencies": {
+    "knox": "0.5.x",
+    "mocha": "1.8.x",
     "mockstream": "0.0.0"
   }
 }
