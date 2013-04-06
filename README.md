@@ -96,6 +96,7 @@ The following options can be passed to the MultiPartUpload constructor -
 * ```headers``` Any additional headers to include on the requests
 * ```partSize``` The minimum size of the parts to upload (default to 5MB).
 * ```maxUploadSize``` The maximum size of the file to upload (default inifinity). Useful if there is a stream with unknown length.
+* ```noDisk``` If true, parts will be kept in-memory instead of written to temp files (default to false).
 
 ### Events
 
