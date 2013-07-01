@@ -14,7 +14,7 @@
   "author": "Nathan Oehlman",
   "license": "BSD",
   "dependencies": {
-    "batches": "0.1.x",
+    "batch": "0.5.x",
     "xml2js": "0.2.x",
     "lodash": "1.0.x"
   },
