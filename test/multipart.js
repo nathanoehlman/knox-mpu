@@ -57,6 +57,12 @@ describe('Knox multipart form uploads', function() {
         // Upload the file
         mpu = new MultiPartUpload(opts, function(err, body) {
             assert.equal(err, "reached maxUploadSize");
+            //Check that the file does not exist
+            client.getFile(opts.objectName, function(err, res) {
+                if (err) return done('Could not get file [' + err + ']');
+                assert.equal(res.statusCode, 403);
+                return done();
+            });
         });
 
         stream.start();
@@ -133,5 +139,5 @@ describe('Knox multipart form uploads', function() {
         });
         
     });
-    
+
 })
