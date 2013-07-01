@@ -137,7 +137,5 @@ describe('Knox multipart form uploads', function() {
 
             });            
         });
-        
     });
-
 })
