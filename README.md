@@ -76,7 +76,9 @@ The following options can be passed to the MultiPartUpload constructor -
 * ```stream``` The stream to upload (required if file is not being supplied)
 * ```file``` The path to the file (required if stream is not being supplied)
 * ```headers``` Any additional headers to include on the requests
-* ```partSize``` The minimum size of the parts to upload (default to 5MB).
+* ```partSize``` The minimum size of the parts to upload (default to 5MB)
+* ```maxConcurrentParts``` The maximum number of concurrent parts that can be uploading at any one time (default is 100)
+* ```noDisk``` If true, parts will be kept in-memory instead of written to temp files (default to false).
 
 ### Events
 
