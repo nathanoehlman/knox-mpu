@@ -9,7 +9,7 @@ var assert = require('assert'),
 describe('Knox multipart form uploads', function() {
 
     var client = null;
-    
+
     before(function(done) {
         try {
             var auth = require('./auth.json');
@@ -19,7 +19,7 @@ describe('Knox multipart form uploads', function() {
             done('Could not create Knox client - please provide an ./auth.json file');
         }
     });
-    
+
     it('should be able to pipe a stream directly to Amazon S3 using the multi part upload', function(done) {
         var testLength = 7242880,
             chunkSize = 2048,
@@ -44,7 +44,24 @@ describe('Knox multipart form uploads', function() {
            
         stream.start(); 
     });
-    
+
+    it('should be able to abort a stream piped directly to Amazon S3 if max file using the multi part upload', function(done) {
+        var testLength = 7242880,
+            chunkSize = 2048,
+            stream = new mockstream.MockDataStream({chunkSize: chunkSize, streamLength: testLength}),
+            opts = {
+                client: client, objectName: Date.now() + '.txt', stream: stream, maxUploadSize : testLength/2
+            },
+            mpu = null;
+
+        // Upload the file
+        mpu = new MultiPartUpload(opts, function(err, body) {
+            assert.equal(err, "reached maxUploadSize");
+        });
+
+        stream.start();
+    });
+
     it('should be able to upload a small file to S3', function(done) {
         
         var testLength = 242880,
@@ -71,7 +88,7 @@ describe('Knox multipart form uploads', function() {
         stream.start();
         
     });
-    
+
     it('should be able to upload a file to S3', function(done) {
         
         // Create a temporary file of data for uploading
