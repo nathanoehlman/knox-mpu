@@ -60,7 +60,7 @@ describe('Knox multipart form uploads', function() {
             //Check that the file does not exist
             client.getFile(opts.objectName, function(err, res) {
                 if (err) return done('Could not get file [' + err + ']');
-                assert.equal(res.statusCode, 403);
+                assert.equal(res.statusCode, 404);
                 return done();
             });
         });
