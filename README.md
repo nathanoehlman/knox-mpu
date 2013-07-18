@@ -29,7 +29,7 @@ To upload a stream, simply pass the stream when constructing the MultiPartUpload
 // Create a Knox client first
 var client = knox.createClient({ ... }),
     upload = null;
-    
+
 
 upload = new MultiPartUpload(
             {
@@ -38,8 +38,17 @@ upload = new MultiPartUpload(
                 stream: stream
             },
             // Callback handler
-            function(err, res) {
-                // If successful, will return a JSON object containing Location, Bucket, Key and ETag of the object
+            function(err, body) {
+                // If successful, will return body, containing Location, Bucket, Key, ETag and size of the object
+                /*
+                  {
+                      Location: 'http://Example-Bucket.s3.amazonaws.com/destination.txt',
+                      Bucket: 'Example-Bucket',
+                      Key: 'destination.txt',
+                      ETag: '"3858f62230ac3c915f300c664312c11f-9"',
+                      size: 7242880
+                  }
+                */
             }
         );
 ````
@@ -53,7 +62,7 @@ To upload a file, pass the path to the file in the constructor. Knox-mpu will sp
 // Create a Knox client first
 var client = knox.createClient({ ... }),
     upload = null;
-    
+
 
 upload = new MultiPartUpload(
             {
@@ -62,8 +71,17 @@ upload = new MultiPartUpload(
                 file: ... // path to the file
             },
             // Callback handler
-            function(err, res) {
-                // If successful, will return a JSON object containing Location, Bucket, Key and ETag of the object
+            function(err, body) {
+                // If successful, will return body, containing Location, Bucket, Key, ETag and size of the object
+                /*
+                  {
+                      Location: 'http://Example-Bucket.s3.amazonaws.com/destination.txt',
+                      Bucket: 'Example-Bucket',
+                      Key: 'destination.txt',
+                      ETag: '"3858f62230ac3c915f300c664312c11f-9"',
+                      size: 7242880
+                  }
+                */
             }
         );
 ````
@@ -85,6 +103,6 @@ The MultiPartUpload will emit a number of events -
 
 * ```initiated``` Emitted when the multi part upload has been initiated, and received an upload ID. Passes the upload id through as the first argument to the event
 * ```uploading``` Emitted each time a part starts uploading. The part id is passed as the first argument.
-* ```uploaded``` Emitted each time a part finishes uploading. Passes through an object containing the part id and Amazon ETag for the uploaded part. 
+* ```uploaded``` Emitted each time a part finishes uploading. Passes through an object containing the part id and Amazon ETag for the uploaded part.
 * ```error``` Emitted each time a part upload fails. Passes an object containing the part id and error message
 * ```completed``` Emitted when the upload has completed successfully. Contains the object information from Amazon S3 (location, bucket, key and ETag)
