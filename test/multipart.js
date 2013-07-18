@@ -167,4 +167,31 @@ describe('Knox multipart form uploads', function() {
         stream.start();
 
     });
+
+    it('should be able to upload a file using the noDisk option', function(done) {
+
+        var testLength = 7242880,
+            chunkSize = 2048,
+            stream = new mockstream.MockDataStream({chunkSize: chunkSize, streamLength: testLength}),
+            opts = {
+                client: client, objectName: Date.now() + '.txt', stream: stream, noDisk: true
+            },
+            mpu = null;
+
+        // Upload the file
+        mpu = new MultiPartUpload(opts, function(err, body) {
+            if (err) return done(err);
+            assert.equal(body['Key'], opts.objectName);
+
+            // Clean up after ourselves
+            client.deleteFile(opts.objectName, function(err, res) {
+                if (err) return done('Could not delete file [' + err + ']');
+                return done();
+            });
+
+        });
+
+        stream.start();
+
+    });
 });
