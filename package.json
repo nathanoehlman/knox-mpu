@@ -19,7 +19,7 @@
     "lodash": "1.0.x"
   },
   "devDependencies": {
-    "knox": "0.5.x",
+    "knox": "~0.8.5",
     "mocha": "1.8.x",
     "mockstream": "0.0.0"
   }
