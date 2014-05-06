@@ -98,6 +98,7 @@ The following options can be passed to the MultiPartUpload constructor -
 * ```batchSize``` The maximum number of concurrent parts that can be uploading at any one time (default is 4)
 * ```maxUploadSize``` The maximum size of the file to upload (default inifinity). Useful if there is a stream with unknown length.
 * ```noDisk``` If true, parts will be kept in-memory instead of written to temp files (default to false).
+* ```maxRetries``` Number of times to retry failed part upload (default is 0 for no retry).
 
 ### Events
 
