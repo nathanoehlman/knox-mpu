@@ -1,26 +1,42 @@
 {
-  "name": "knox-mpu",
-  "version": "0.1.6",
-  "description": "Provide multi part upload functionality to Amazon S3 using the knox library",
-  "keywords": ["aws", "amazon", "s3", "knox", "multi", "part", "upload"],
+  "name": "knox-mpu-alt",
+  "version": "0.1.8",
+  "description": "Provide multi part upload functionality to Amazon S3 using the knox library.  Forked from knox-mpu.",
+  "keywords": [
+    "aws",
+    "amazon",
+    "s3",
+    "knox",
+    "multi",
+    "part",
+    "upload"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "mocha --reporter spec -t 0"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/nathanoehlman/knox-mpu.git"
+    "url": "git://github.com/balderdashy/knox-mpu.git"
   },
-  "author": "Nathan Oehlman",
+  "author": {
+    "name": "Balderdash"
+  },
   "license": "BSD",
   "dependencies": {
-    "batch": "0.5.x",
-    "xml2js": "0.2.x",
-    "lodash": "1.0.x"
+    "async": "^0.9.0",
+    "lodash": "1.0.x",
+    "xml2js": "0.2.x"
   },
   "devDependencies": {
     "knox": "~0.8.5",
     "mocha": "1.8.x",
     "mockstream": "0.0.0"
-  }
+  },
+  "readme": "## knox-mpu\n\nForked from [knox-mpu](https://github.com/nathanoehlman/knox-mpu).\n\nA Node.js client designed to make large file uploads to Amazon S3 via the [MultiPartUpload API](http://docs.amazonwebservices.com/AmazonS3/latest/dev/sdksupportformpu.html) simple and easy. It's built on top of the excellent [Knox](https://github.com/LearnBoost/knox) library from the guys over at LearnBoost.\n\n### Features\n\n* Simple and easy to use\n* Pipe either a file, or a stream directly to S3 (No need to know the content length first!)\n* Automatically separates a file/stream into appropriate sized segments for upload\n* Asynchronous uploading of segments\n* Handy events to track your upload progress\n\n_Planned_\n\n* Better error handling (reuploading failed parts, etc)\n\n### Installing\n\nInstallation is done via NPM, by running ```npm install knox-mpu```\n\n### Examples\n\n#### Uploading a stream\n\nTo upload a stream, simply pass the stream when constructing the MultiPartUpload. The upload will then listen to the stream, and create parts from incoming data stream. When a part reaches the minimum part size, it will attempt to upload it to S3.\n\n```javascript\n\n// Create a Knox client first\nvar client = knox.createClient({ ... }),\n    upload = null;\n\n\nupload = new MultiPartUpload(\n            {\n                client: client,\n                objectName: 'destination.txt', // Amazon S3 object name\n                stream: stream\n            },\n            // Callback handler\n            function(err, body) {\n                // If successful, will return body, containing Location, Bucket, Key, ETag and size of the object\n                /*\n                  {\n                      Location: 'http://Example-Bucket.s3.amazonaws.com/destination.txt',\n                      Bucket: 'Example-Bucket',\n                      Key: 'destination.txt',\n                      ETag: '\"3858f62230ac3c915f300c664312c11f-9\"',\n                      size: 7242880\n                  }\n                */\n            }\n        );\n````\n\n#### Uploading a file\n\nTo upload a file, pass the path to the file in the constructor. Knox-mpu will split the file into parts and upload them.\n\n```javascript\n\n// Create a Knox client first\nvar client = knox.createClient({ ... }),\n    upload = null;\n\n\nupload = new MultiPartUpload(\n            {\n                client: client,\n                objectName: 'destination.txt', // Amazon S3 object name\n                file: ... // path to the file\n            },\n            // Callback handler\n            function(err, body) {\n                // If successful, will return body, containing Location, Bucket, Key, ETag and size of the object\n                /*\n                  {\n                      Location: 'http://Example-Bucket.s3.amazonaws.com/destination.txt',\n                      Bucket: 'Example-Bucket',\n                      Key: 'destination.txt',\n                      ETag: '\"3858f62230ac3c915f300c664312c11f-9\"',\n                      size: 7242880\n                  }\n                */\n            }\n        );\n````\n### Options\n\nThe following options can be passed to the MultiPartUpload constructor -\n\n* ```client``` _Required_ The knox client to use for this upload request\n* ```objectName``` _Required_ The destination object name/path on S3 for this upload\n* ```stream``` The stream to upload (required if file is not being supplied)\n* ```file``` The path to the file (required if stream is not being supplied)\n* ```headers``` Any additional headers to include on the requests\n* ```partSize``` The minimum size of the parts to upload (default to 5MB).\n* ```batchSize``` The maximum number of concurrent parts that can be uploading at any one time (default is 4)\n* ```maxUploadSize``` The maximum size of the file to upload (default inifinity). Useful if there is a stream with unknown length.\n* ```noDisk``` If true, parts will be kept in-memory instead of written to temp files (default to false).\n* ```maxRetries``` Number of times to retry failed part upload (default is 0 for no retry).\n\n### Events\n\nThe MultiPartUpload will emit a number of events -\n\n* ```initiated``` Emitted when the multi part upload has been initiated, and received an upload ID. Passes the upload id through as the first argument to the event\n* ```uploading``` Emitted each time a part starts uploading. The part id is passed as the first argument.\n* ```uploaded``` Emitted each time a part finishes uploading. Passes through an object containing the part id and Amazon ETag for the uploaded part.\n* ```error``` Emitted each time a part upload fails. Passes an object containing the part id and error message\n* ```completed``` Emitted when the upload has completed successfully. Contains the object information from Amazon S3 (location, bucket, key and ETag)\n",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/balderdashy/knox-mpu/issues"
+  },
+  "homepage": "https://github.com/balderdashy/knox-mpu"
 }
