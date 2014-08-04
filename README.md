@@ -1,4 +1,8 @@
-## knox-mpu
+## knox-mpu-alt
+
+> This is a fork of https://github.com/nathanoehlman/knox-mpu.  If/when the relevant PRs associated w/ this module get merged, we can fold it back into the main repo (we just couldn't wait any longer for it).
+>
+> ~[mike](http://twitter.com/mikermcneil) and [scott](http://twitter.com/sgress454)
 
 A Node.js client designed to make large file uploads to Amazon S3 via the [MultiPartUpload API](http://docs.amazonwebservices.com/AmazonS3/latest/dev/sdksupportformpu.html) simple and easy. It's built on top of the excellent [Knox](https://github.com/LearnBoost/knox) library from the guys over at LearnBoost.
 
