@@ -20,7 +20,7 @@ _Planned_
 
 ### Installing
 
-Installation is done via NPM, by running ```npm install knox-mpu```
+Installation is done via NPM, by running ```npm install knox-mpu-alt```
 
 ### Examples
 
