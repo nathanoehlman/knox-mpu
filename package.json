@@ -1,6 +1,6 @@
 {
   "name": "knox-mpu-alt",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Provide multi part upload functionality to Amazon S3 using the knox library.  Forked from knox-mpu.",
   "keywords": [
     "aws",
