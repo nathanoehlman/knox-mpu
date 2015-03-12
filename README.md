@@ -107,5 +107,5 @@ The MultiPartUpload will emit a number of events -
 * ```initiated``` Emitted when the multi part upload has been initiated, and received an upload ID. Passes the upload id through as the first argument to the event
 * ```uploading``` Emitted each time a part starts uploading. The part id is passed as the first argument.
 * ```uploaded``` Emitted each time a part finishes uploading. Passes through an object containing the part id and Amazon ETag for the uploaded part.
-* ```error``` Emitted each time a part upload fails. Passes an object containing the part id and error message
+* ```failed``` Emitted each time a part upload fails. Passes an object containing the part id and error message
 * ```completed``` Emitted when the upload has completed successfully. Contains the object information from Amazon S3 (location, bucket, key and ETag)
