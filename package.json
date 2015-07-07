@@ -1,6 +1,6 @@
 {
   "name": "knox-mpu",
-  "version": "0.1.7",
+  "version": "0.1.6",
   "description": "Provide multi part upload functionality to Amazon S3 using the knox library",
   "keywords": [
     "aws",
